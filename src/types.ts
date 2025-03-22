@@ -25,3 +25,9 @@ export type SocialObjects = {
   active: boolean;
   linkTitle: string;
 }[];
+
+export interface Customer {
+  CustomerId: number;
+  CompanyName: string;
+  ContactName: string;
+};

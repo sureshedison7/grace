@@ -8,9 +8,17 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import mdx from "@astrojs/mdx";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
   site: SITE.website,
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    }
+  }),
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -19,6 +27,7 @@ export default defineConfig({
     sitemap(),
     mdx(),
   ],
+
   markdown: {
     remarkPlugins: [
       remarkToc,
@@ -34,10 +43,12 @@ export default defineConfig({
       wrap: true,
     },
   },
+
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
   },
+
   scopedStyleStrategy: "where",
 });
